@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "frozen_at_utc": "2026-10-04T12:58:36.243330+00:00",
+  "status": "frozen before final-test evaluation",
+  "methods": [
+    "overlap",
+    "tfidf",
+    "semantic"
+  ],
+  "top_k": 5,
+  "snapshot": {
+    "source_sha256": {
+      "dataset.py": "1a6c892c9d67567088fadc9326ed85f0a8e8b0a8b223d1abd335617d669f9083",
+      "retrieval.py": "31a994fca51030eb6cfa450d2211499f929690b56f2061881663e801458a9d62",
+      "engine.py": "984fdd5e7059bfa7adc9367355fa54d5ecf93c97214c22aac078e99f36f3374e",
+      "semantic.py": "882c6686ced2db190564ff701fa97b28ab9a40192034c4b8e78e24d9eb9bdf65",
+      "evaluate.py": "5379f19c5bfeb82cb05f9218c984acc44ef12f923e8787bf8134348420e7df94",
+      "freeze_protocol.py": "fd1cdc9ea2f878466a18bcfc650b50d9fa01332a1da2e25ac015cc54e0c59ab3"
+    },
+    "dataset_sha256": "9a50c9593e8ce5bc9aced182543baf0ff1510cd3a413e2a375a9a8192a88793a",
+    "dataset_metadata": {
+      "source": "https://github.com/google-deepmind/xquad",
+      "upstream_commit": "7d30520c717524000f0d9d2f9c10a069acd9d285",
+      "raw_sha256": "f619a1eb11fb42d3ab0834259e488a65f585447ef6154437bfb7199d85161a04",
+      "license": "CC BY-SA 4.0",
+      "adaptation": "Vietnamese closed-corpus passage retrieval; not official XQuAD QA evaluation",
+      "split": "70/30 paragraph-grouped query split; fixed seed 42; full candidate corpus indexed"
+    },
+    "document_count": 240,
+    "split_query_counts": {
+      "dev": 843,
+      "test": 347
+    }
+  },
+  "model_configuration": {
+    "model_name": "intfloat/multilingual-e5-small",
+    "model_revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "max_seq_length": 512,
+    "dimension": 384,
+    "query_prefix": "query: ",
+    "passage_prefix": "passage: ",
+    "normalize_embeddings": true
+  },
+  "reference_device": "cpu",
+  "metric_definitions": {
+    "hit_at_1": "Fraction with the single annotated passage ranked first.",
+    "hit_at_5": "Fraction with the single annotated passage in ranks 1 through 5.",
+    "mrr_at_5": "Mean reciprocal annotated-passage rank through 5; zero for a miss."
+  },
+  "selection_policy": "Fixed comparison of distinct-token overlap, TF-IDF cosine and a pinned pretrained multilingual embedding model; no fine-tuning.",
+  "split_policy": "Paragraph-grouped questions, seed 42, 70/30 paragraph split; the full collection is known and indexed for both splits.",
+  "test_policy": "Freeze after development; run the untouched test once for reporting and do not change methods in response to its scores."
+}

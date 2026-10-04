@@ -1,0 +1,105 @@
+{
+  "split": "test",
+  "created_at_utc": "2026-10-04T12:58:41.458586+00:00",
+  "document_count": 240,
+  "query_count": 347,
+  "dataset": {
+    "source": "https://github.com/google-deepmind/xquad",
+    "upstream_commit": "7d30520c717524000f0d9d2f9c10a069acd9d285",
+    "raw_sha256": "f619a1eb11fb42d3ab0834259e488a65f585447ef6154437bfb7199d85161a04",
+    "license": "CC BY-SA 4.0",
+    "adaptation": "Vietnamese closed-corpus passage retrieval; not official XQuAD QA evaluation",
+    "split": "70/30 paragraph-grouped query split; fixed seed 42; full candidate corpus indexed"
+  },
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.5.3",
+    "torch": "2.14.1",
+    "transformers": "5.18.0",
+    "sentence-transformers": "5.7.0",
+    "huggingface-hub": "1.33.0"
+  },
+  "code_sha256": "73e76488987a07a18ee605fc05d01974c80ff878021449767ba18e7e45b20de5",
+  "source_sha256": {
+    "dataset.py": "1a6c892c9d67567088fadc9326ed85f0a8e8b0a8b223d1abd335617d669f9083",
+    "retrieval.py": "31a994fca51030eb6cfa450d2211499f929690b56f2061881663e801458a9d62",
+    "engine.py": "984fdd5e7059bfa7adc9367355fa54d5ecf93c97214c22aac078e99f36f3374e",
+    "semantic.py": "882c6686ced2db190564ff701fa97b28ab9a40192034c4b8e78e24d9eb9bdf65",
+    "evaluate.py": "5379f19c5bfeb82cb05f9218c984acc44ef12f923e8787bf8134348420e7df94",
+    "freeze_protocol.py": "fd1cdc9ea2f878466a18bcfc650b50d9fa01332a1da2e25ac015cc54e0c59ab3"
+  },
+  "protocol_sha256": "a9c3c2bcd4e0791c138f9193bd444848814377fc5d0a494ea836620ca754d203",
+  "engine": {
+    "model_name": "intfloat/multilingual-e5-small",
+    "model_revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "dimension": 384,
+    "max_seq_length": 512,
+    "query_prefix": "query: ",
+    "passage_prefix": "passage: ",
+    "normalize_embeddings": true,
+    "batch_size": 16,
+    "device": "cpu",
+    "corpus_sha256": "90d521b261c4f26d0bfcefda98f1e4c1d0cc7c2792461ed0d2c178b78bf39026",
+    "corpus_truncated_count": 3,
+    "cache_hit": true,
+    "setup_seconds": 3.7779630000004545
+  },
+  "engine_initialization_seconds": 3.8168434999970486,
+  "warmup_seconds": 0.015474458996322937,
+  "results": [
+    {
+      "method": "overlap",
+      "query_count": 347,
+      "top_k": 5,
+      "hit_at_1": 0.7780979827089337,
+      "hit_at_5": 0.9020172910662824,
+      "mrr_at_5": 0.8267050912584054,
+      "total_search_seconds": 0.06559916699916357,
+      "throughput_ms_per_query": 0.18904659077568753,
+      "queries_per_second": 5289.701315939339,
+      "timing_mode": "batch throughput"
+    },
+    {
+      "method": "tfidf",
+      "query_count": 347,
+      "top_k": 5,
+      "hit_at_1": 0.8357348703170029,
+      "hit_at_5": 0.9798270893371758,
+      "mrr_at_5": 0.8974063400576369,
+      "total_search_seconds": 0.1041285829996923,
+      "throughput_ms_per_query": 0.30008237175703834,
+      "queries_per_second": 3332.4183428197175,
+      "timing_mode": "batch throughput"
+    },
+    {
+      "method": "semantic",
+      "query_count": 347,
+      "top_k": 5,
+      "hit_at_1": 0.930835734870317,
+      "hit_at_5": 0.9913544668587896,
+      "mrr_at_5": 0.9573487031700287,
+      "total_search_seconds": 0.6139012499988894,
+      "throughput_ms_per_query": 1.769167867431958,
+      "queries_per_second": 565.2374873004865,
+      "timing_mode": "batch throughput"
+    }
+  ],
+  "paired_top1": {
+    "left": "tfidf",
+    "right": "semantic",
+    "both_correct": 275,
+    "left_only_correct": 15,
+    "right_only_correct": 48,
+    "both_incorrect": 9
+  },
+  "limitations": [
+    "Small, translated, QA-derived collection; not the official XQuAD QA benchmark or a broad Vietnamese search benchmark.",
+    "Only the original source paragraph is labeled relevant; other relevant passages may be scored as wrong.",
+    "The full candidate corpus is shared by dev and test. This is unseen-query evaluation on a known corpus.",
+    "Lexical tokenization uses Unicode-normalized syllables, not Vietnamese word segmentation.",
+    "The pretrained semantic model is used without task-specific fine-tuning. Pretraining overlap with this benchmark cannot be ruled out.",
+    "The model truncates long inputs at its configured token limit; inspect corpus_truncated_count in model metadata.",
+    "No paraphrase, out-of-domain, no-answer, large-corpus or statistical-significance experiment has been completed.",
+    "Batch throughput depends on hardware, caches and batch strategy and is not interactive request latency."
+  ]
+}

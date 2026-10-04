@@ -1,0 +1,20 @@
+# Local Python environment and generated files
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store
+.env
+.env.*
+!.env.example
+.pytest_cache/
+.cache/
+*.log
+
+# Downloaded datasets and detailed runs are regenerated locally
+data/raw/
+data/processed/
+results/*.json
+
+# Keep portable benchmark evidence in the repository
+!results/*-metrics.json
+!results/protocol.json

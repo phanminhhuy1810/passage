@@ -1,0 +1,7 @@
+# Direct runtime dependencies. Use requirements-lock.txt for the verified environment.
+numpy==2.5.3
+sentence-transformers==5.7.0
+torch==2.14.1
+fastapi==0.142.2
+uvicorn==0.54.0
+httpx==0.28.1
