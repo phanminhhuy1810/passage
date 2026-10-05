@@ -2,7 +2,7 @@
 
 A local search demo for Vietnamese passages. It compares token overlap, TF-IDF and a pretrained multilingual E5 encoder on a small retrieval benchmark adapted from XQuAD.
 
-Built with Codex assistance as an NLP learning project. The app retrieves text from its collection; it does not generate answers or search the web.
+An NLP learning project focused on retrieval methods and evaluation. The app retrieves text from its collection; it does not generate answers or search the web.
 
 ![Search interface](docs/assets/passage.jpg)
 
@@ -102,7 +102,7 @@ The dataset revision, model revision, split and frozen implementation are record
 | `lessons/`, `docs/` | Small examples, Vietnamese learning notes and research documentation |
 | `tests/` | Retrieval, metric, server and integrity checks |
 
-For learning in Vietnamese, start with [PROJECT-MAP.md](docs/PROJECT-MAP.md) and [HOC-TIEP.md](docs/HOC-TIEP.md). [CONTRIBUTIONS.md](docs/CONTRIBUTIONS.md) records AI assistance and the work personally practiced so far.
+For learning in Vietnamese, start with [PROJECT-MAP.md](docs/PROJECT-MAP.md) and [HOC-TIEP.md](docs/HOC-TIEP.md). See [CONTRIBUTIONS.md](docs/CONTRIBUTIONS.md) for the development and learning log.
 
 ## Troubleshooting
 
