@@ -1,8 +1,8 @@
 # Học từ sản phẩm đã chạy được
 
-Theo yêu cầu mới, code và sản phẩm được hoàn thiện trước; các buổi học sau giúp bạn đọc, kiểm chứng và làm chủ từng phần. Bạn không cần hiểu tất cả thư mục trong một lần.
+Passage đã có demo và các báo cáo đánh giá. Tài liệu này hướng dẫn đọc, chạy lại và kiểm chứng từng phần của hệ thống, bắt đầu từ một câu hỏi và kết quả tìm kiếm.
 
-Mỗi buổi chỉ kết thúc khi có **một đầu ra quan sát được**. Đầu ra có thể là một phép tính tay, một lần chạy có ghi nhận hoặc một đoạn phân tích lỗi; không nhất thiết phải thêm tính năng.
+Mỗi buổi có **một đầu ra quan sát được**: một phép tính tay, một lần chạy có ghi nhận hoặc một đoạn phân tích lỗi. Hoàn thành từng bước nhỏ trước khi chuyển sang phần tiếp theo.
 
 ## Bước 1 — Đi từ câu hỏi tới thứ hạng
 
@@ -34,7 +34,7 @@ Chạy `.venv/bin/python evaluate.py --split dev`. Đọc báo cáo, chọn ba c
 
 **Đầu ra:** một bảng tính tay ba dòng khớp với cách tính trong `evaluate.py`; ghi rõ 843 câu dev và kho 240 đoạn là hai số khác nhau. Ghi môi trường và lệnh đã dùng. Không cần chạy lại test để học công thức.
 
-**Tài liệu:** `evaluate.py`, [README — data and evaluation](../README.md#data-and-evaluation-protocol), [XQuAD gốc](https://github.com/google-deepmind/xquad).
+**Tài liệu:** `evaluate.py`, [README - dataset and results](../README.md#dataset-and-results), [XQuAD gốc](https://github.com/google-deepmind/xquad).
 
 ## Bước 5 — Phân tích năm lỗi cụ thể
 
@@ -56,7 +56,7 @@ Cuối cùng, trình bày dự án trong khoảng hai phút: bài toán → dữ
 
 Ghi đúng **năm thuật ngữ** gặp trong tài liệu, kèm một câu tự viết bằng tiếng Anh và ý nghĩa bằng tiếng Việt. Với buổi đầu có thể chọn: `query`, `passage`, `retrieval`, `ranking`, `relevance`. Buổi sau thay bằng từ mới thật sự đã gặp.
 
-Mục tiêu là đọc hiểu một đoạn và dùng lại từ trong bối cảnh dự án. Không cần tự nhận đọc thành thạo chỉ vì đã mở tài liệu tiếng Anh.
+Mục tiêu là đọc hiểu một đoạn và dùng lại từ trong bối cảnh dự án. Tra từ trong ngữ cảnh, rồi diễn đạt lại một ý bằng lời của mình.
 
 ## Ghi nhận để cập nhật CV
 
