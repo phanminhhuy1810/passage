@@ -27,6 +27,7 @@ function setLoading(active) {
   searching = active;
   $("search-button").disabled = active || !serviceReady;
   $("search-button").textContent = active ? "Searching…" : "Search";
+  $("query").disabled = active;
   $("top-k").disabled = active;
   $("results-section").setAttribute("aria-busy", String(active));
   $("results-panel").classList.toggle("loading", active);
@@ -97,6 +98,8 @@ function renderView() {
   const panel = $("results-panel");
   panel.replaceChildren();
   if (!lastResult) {
+    $("result-context").hidden = true;
+    $("result-note").hidden = true;
     const empty = element("div", "initial-state");
     empty.append(element("p", "", compare ? "Search to compare the three ranked lists." : "Enter a question to find its source passage."));
     empty.append(element("span", "", "Or choose one of the examples above."));
@@ -206,6 +209,8 @@ $("search-form").addEventListener("submit", async event => {
     renderView();
     $("result-announcement").textContent = `Results ready for ${payload.query}.`;
   } catch (error) {
+    lastResult = null;
+    renderView();
     showError(error.message);
     $("result-announcement").textContent = "Search failed.";
   } finally { setLoading(false); }
