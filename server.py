@@ -17,6 +17,7 @@ from dataset import load_dataset
 from engine import METHODS, SearchEngine
 
 ROOT = Path(__file__).resolve().parent
+DEMO_QUERY_IDS = ("56dfb5777aa994140058e021",)
 
 
 class SearchRequest(BaseModel):
@@ -56,7 +57,9 @@ def create_app(*, provided_engine=None, provided_data=None):
         data, engine = app.state.data, app.state.engine
         docs = {d["id"]: d for d in data["documents"]}
         examples, seen_titles = [], set()
-        for question in data["queries"]:
+        # Curated development examples precede the source-file order.
+        questions = sorted(data["queries"], key=lambda q: q["id"] not in DEMO_QUERY_IDS)
+        for question in questions:
             title = docs[question["gold_id"]]["title"]
             if question["split"] == "dev" and title not in seen_titles:
                 examples.append({"text": question["text"], "title": title})

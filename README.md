@@ -1,8 +1,8 @@
 # Passage
 
-A local search demo for Vietnamese passages. It compares token overlap, TF-IDF and a pretrained multilingual E5 encoder on a small retrieval benchmark adapted from XQuAD.
+A local passage search system for Vietnamese text. It compares token overlap, TF-IDF and a pretrained multilingual E5 encoder on a small retrieval benchmark adapted from XQuAD.
 
-An NLP learning project focused on retrieval methods and evaluation. The app retrieves text from its collection; it does not generate answers or search the web.
+The project includes a browser demo, command-line search, a reproducible evaluation protocol and an analysis of retrieval errors. Search returns passages from the fixed collection; it does not generate answers or search the web.
 
 ![Search interface](docs/assets/passage.jpg)
 
@@ -87,22 +87,25 @@ After setup:
 .venv/bin/python -m unittest discover -s tests -v
 .venv/bin/python evaluate.py --split dev
 .venv/bin/python evaluate.py --split test --final-test
+.venv/bin/python format_reports.py
 ```
 
-The dataset revision, model revision, split and frozen implementation are recorded in [the protocol](docs/RESEARCH-PROTOCOL.md) and `results/protocol.json`. The final command reproduces that recorded run. Changes made after seeing the test results need a new evaluation design; the existing test is no longer unseen.
+The dataset revision, model revision, split and frozen implementation are recorded in [the protocol](docs/RESEARCH-PROTOCOL.md) and `results/protocol.json`. The test command reproduces that recorded run. Changes made after seeing the test results need a new evaluation design; the existing test is no longer unseen.
 
-## Code and learning notes
+The formatter prepares concise Markdown reports without changing JSON results, runtime measurements or the frozen protocol.
+
+## Project structure and documentation
 
 | Path | Purpose |
 | --- | --- |
 | `dataset.py` | Dataset preparation and splitting |
 | `retrieval.py`, `semantic.py`, `engine.py` | Retrieval methods and shared search interface |
 | `search.py`, `server.py`, `web/` | Command-line and browser demo |
-| `evaluate.py`, `freeze_protocol.py`, `results/` | Evaluation and recorded evidence |
-| `lessons/`, `docs/` | Small examples, Vietnamese learning notes and research documentation |
+| `evaluate.py`, `freeze_protocol.py`, `format_reports.py`, `results/` | Evaluation, report formatting and recorded evidence |
+| `docs/` | System architecture, evaluation protocol and findings |
 | `tests/` | Retrieval, metric, server and integrity checks |
 
-For learning in Vietnamese, start with [PROJECT-MAP.md](docs/PROJECT-MAP.md) and [HOC-TIEP.md](docs/HOC-TIEP.md). See [CONTRIBUTIONS.md](docs/CONTRIBUTIONS.md) for the development and learning log.
+See the [system architecture](docs/PROJECT-MAP.md), [evaluation protocol](docs/RESEARCH-PROTOCOL.md) and [evaluation report](docs/FINDINGS.md) for implementation details and interpretation of the recorded results.
 
 ## Troubleshooting
 
@@ -112,6 +115,8 @@ For learning in Vietnamese, start with [PROJECT-MAP.md](docs/PROJECT-MAP.md) and
 - Browser did not open: keep the server running and open its printed local URL.
 
 ## Credits and license
+
+Developed with Codex assistance.
 
 The dataset is [XQuAD](https://github.com/google-deepmind/xquad), by Mikel Artetxe, Sebastian Ruder and Dani Yogatama ([paper](https://arxiv.org/abs/1910.11856)). The semantic encoder is [intfloat/multilingual-e5-small](https://huggingface.co/intfloat/multilingual-e5-small).
 
