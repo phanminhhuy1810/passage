@@ -21,6 +21,8 @@ bash "Open Retrieval Lab.command"
 
 The launcher opens [localhost:8765](http://127.0.0.1:8765). Keep its Terminal open and press Ctrl+C there to stop the server. You can also double-click `Open Retrieval Lab.command` after setup.
 
+Open the demo through that local address. Opening `web/index.html` directly displays launch instructions; search requires the running local server.
+
 For terminal use on macOS or Linux:
 
 ```bash
