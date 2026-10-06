@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#ffffff" />
   <title>Passage — Vietnamese text search</title>
-  <link rel="stylesheet" href="/app.css" />
-  <script defer src="/app.js?v=20261006"></script>
+  <link rel="stylesheet" href="./app.css?v=20261006-launch" />
+  <script defer src="./app.js?v=20261006-launch"></script>
 </head>
 <body>
   <a class="skip-link" href="#query">Skip to search</a>
   <header class="site-header">
     <div class="header-inner">
-      <a class="wordmark" href="/">Passage</a>
+      <a class="wordmark" href="./">Passage</a>
       <span class="header-description">Vietnamese text search</span>
       <div class="connection-status" id="connection-status" role="status"><span class="status-dot"></span><span id="connection-text">Connecting</span></div>
     </div>
@@ -24,7 +24,7 @@
       <form id="search-form">
         <label class="sr-only" for="query">Vietnamese question or keywords</label>
         <div class="search-box">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.6"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.6"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           <input id="query" name="query" type="search" maxlength="500" autocomplete="off" placeholder="Ask a question in Vietnamese…" aria-describedby="search-hint" required />
           <button id="search-button" class="search-button" type="submit" disabled>Search</button>
         </div>

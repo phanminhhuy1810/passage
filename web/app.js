@@ -183,36 +183,58 @@ async function loadStatus() {
     showError(`Cannot connect to the local app. ${error.message}`);
   }
 }
-document.querySelectorAll(".method-tab").forEach(button => button.addEventListener("click", () => {
-  activeMethod = button.dataset.method;
-  compare = false;
-  renderView();
-}));
-$("compare-button").addEventListener("click", () => { compare = !compare; renderView(); });
-$("search-form").addEventListener("submit", async event => {
-  event.preventDefault();
-  if (searching || !serviceReady) return;
-  const query = $("query").value.trim();
-  if (!query) { $("query").focus(); return; }
-  clearError();
-  setLoading(true);
-  $("result-announcement").textContent = "Searching the passage collection.";
-  try {
-    const payload = await readJSON(await fetch("/api/search", {
-      method:"POST", headers:{"Content-Type":"application/json",Accept:"application/json"},
-      body:JSON.stringify({query,top_k:Number($("top-k").value)}),
-    }));
-    if (!Array.isArray(payload.results) || Object.keys(METHODS).some(method => !payload.results.some(result => result.method === method && Array.isArray(result.hits)))) {
-      throw new Error("The search response is incomplete.");
-    }
-    lastResult = payload;
+function showLaunchGuide() {
+  document.title = "Open Passage";
+  const guide = element("main", "launch-guide");
+  guide.append(element("h1", "", "Open the local demo"));
+  const instruction = element("p");
+  instruction.append("Start Passage by opening ", element("code", "", "Open Retrieval Lab.command"),
+    " in the project folder. Keep its Terminal window open, then follow the link below.");
+  const link = element("a", "launch-link", "Open Passage");
+  link.href = "http://127.0.0.1:8765/";
+  guide.append(instruction, link);
+  document.querySelector(".workspace").replaceWith(guide);
+  document.querySelector(".skip-link").remove();
+  $("connection-status").hidden = true;
+}
+
+function startApp() {
+  if (window.location.protocol === "file:") {
+    showLaunchGuide();
+    return;
+  }
+  document.querySelectorAll(".method-tab").forEach(button => button.addEventListener("click", () => {
+    activeMethod = button.dataset.method;
+    compare = false;
     renderView();
-    $("result-announcement").textContent = `Results ready for ${payload.query}.`;
-  } catch (error) {
-    lastResult = null;
-    renderView();
-    showError(error.message);
-    $("result-announcement").textContent = "Search failed.";
-  } finally { setLoading(false); }
-});
-loadStatus();
+  }));
+  $("compare-button").addEventListener("click", () => { compare = !compare; renderView(); });
+  $("search-form").addEventListener("submit", async event => {
+    event.preventDefault();
+    if (searching || !serviceReady) return;
+    const query = $("query").value.trim();
+    if (!query) { $("query").focus(); return; }
+    clearError();
+    setLoading(true);
+    $("result-announcement").textContent = "Searching the passage collection.";
+    try {
+      const payload = await readJSON(await fetch("/api/search", {
+        method:"POST", headers:{"Content-Type":"application/json",Accept:"application/json"},
+        body:JSON.stringify({query,top_k:Number($("top-k").value)}),
+      }));
+      if (!Array.isArray(payload.results) || Object.keys(METHODS).some(method => !payload.results.some(result => result.method === method && Array.isArray(result.hits)))) {
+        throw new Error("The search response is incomplete.");
+      }
+      lastResult = payload;
+      renderView();
+      $("result-announcement").textContent = `Results ready for ${payload.query}.`;
+    } catch (error) {
+      lastResult = null;
+      renderView();
+      showError(error.message);
+      $("result-announcement").textContent = "Search failed.";
+    } finally { setLoading(false); }
+  });
+  loadStatus();
+}
+startApp();
