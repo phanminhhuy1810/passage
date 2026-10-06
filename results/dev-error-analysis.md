@@ -18,8 +18,6 @@ Gold title: **Super_Bowl_50**. Passage ID: `34d6bc0e2da46017317c9ba3d115b62df112
 | tfidf | 2 | Super_Bowl_50 |
 | semantic | 1 | Super_Bowl_50 |
 
-Review prompts: Does the top passage contain the requested fact? Which query words or related meanings appear in each passage? Could an unlabeled passage also be relevant? For long passages, check whether the relevant evidence falls beyond the model's token limit.
-
 ### Query `56beb86b3aeaaa14008c92c0`
 
 John Elway hiện đang có vai trò gì trong hệ thống của Broncos?
@@ -33,8 +31,6 @@ Gold title: **Super_Bowl_50**. Passage ID: `1bf4034fd4142bdeaba3f7f809a6d0f60d58
 | overlap | Miss | Scottish_Parliament |
 | tfidf | 2 | Scottish_Parliament |
 | semantic | 1 | Super_Bowl_50 |
-
-Review prompts: Does the top passage contain the requested fact? Which query words or related meanings appear in each passage? Could an unlabeled passage also be relevant? For long passages, check whether the relevant evidence falls beyond the model's token limit.
 
 ## TF-IDF top-1 correct; semantic top-1 incorrect
 
@@ -52,8 +48,6 @@ Gold title: **Super_Bowl_50**. Passage ID: `877fe0a2b4660db1c85d51f125b471205a38
 | tfidf | 1 | Super_Bowl_50 |
 | semantic | 2 | Super_Bowl_50 |
 
-Review prompts: Does the top passage contain the requested fact? Which query words or related meanings appear in each passage? Could an unlabeled passage also be relevant? For long passages, check whether the relevant evidence falls beyond the model's token limit.
-
 ### Query `56bf36b93aeaaa14008c9564`
 
 Trận đấu còn lại bao nhiêu giây khi Broncos đoạt bóng từ đường chuyền và giành chiến thắng trong trận đấu?
@@ -67,8 +61,6 @@ Gold title: **Super_Bowl_50**. Passage ID: `34d6bc0e2da46017317c9ba3d115b62df112
 | overlap | 2 | Super_Bowl_50 |
 | tfidf | 1 | Super_Bowl_50 |
 | semantic | 2 | Super_Bowl_50 |
-
-Review prompts: Does the top passage contain the requested fact? Which query words or related meanings appear in each passage? Could an unlabeled passage also be relevant? For long passages, check whether the relevant evidence falls beyond the model's token limit.
 
 ## Both top-1 incorrect
 
@@ -86,8 +78,6 @@ Gold title: **Computational_complexity_theory**. Passage ID: `b59fb3a8c215b0a14a
 | tfidf | Miss | Private_school |
 | semantic | 2 | Prime_number |
 
-Review prompts: Does the top passage contain the requested fact? Which query words or related meanings appear in each passage? Could an unlabeled passage also be relevant? For long passages, check whether the relevant evidence falls beyond the model's token limit.
-
 ### Query `56e1b62ecd28a01900c67aa4`
 
 Lý thuyết độ phức tạp phân loại các vấn đề dựa trên thuộc tính chính nào?
@@ -101,8 +91,6 @@ Gold title: **Computational_complexity_theory**. Passage ID: `2647280002dc738dce
 | overlap | 1 | Computational_complexity_theory |
 | tfidf | 3 | Computational_complexity_theory |
 | semantic | 2 | Computational_complexity_theory |
-
-Review prompts: Does the top passage contain the requested fact? Which query words or related meanings appear in each passage? Could an unlabeled passage also be relevant? For long passages, check whether the relevant evidence falls beyond the model's token limit.
 
 ## Scope
 

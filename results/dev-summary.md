@@ -65,6 +65,6 @@ Engine initialization: 4.89 s. Warm-up across three methods: 0.13 s.
 - Detailed per-query ranks remain local in `results/dev.json`; compact metrics are in `results/dev-metrics.json`.
 - See [the research protocol](../docs/RESEARCH-PROTOCOL.md) for freeze and final-test commands.
 
-Implementation and experiments were completed with AI assistance. These measurements describe the system; they do not establish the student's independent implementation or mastery.
+Implementation and experiments were completed with AI assistance.
 
 Dataset attribution: XQuAD — Artetxe, Ruder & Yogatama (2019), CC BY-SA 4.0. Passage grouping, retrieval adaptation and evaluation are specific to this project.
