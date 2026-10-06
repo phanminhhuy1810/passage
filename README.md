@@ -4,7 +4,7 @@ A local passage search system for Vietnamese text. It compares token overlap, TF
 
 The project includes a browser demo, command-line search, a reproducible evaluation protocol and an analysis of retrieval errors. Search returns passages from the fixed collection; it does not generate answers or search the web.
 
-![Search interface](docs/assets/passage.jpg)
+![Tesla query and its top-ranked source passage](docs/assets/passage-demo.jpg)
 
 ## Quick start
 
