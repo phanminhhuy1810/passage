@@ -1,6 +1,6 @@
-# What the experiment found
+# Evaluation report
 
-Recorded on 4 October 2026. Implementation and evaluation were completed with AI assistance; the student's follow-up learning is recorded separately in [CONTRIBUTIONS.md](CONTRIBUTIONS.md).
+Final test recorded on 4 October 2026. The experiment compares established retrieval methods on a Vietnamese passage-retrieval adaptation of XQuAD; E5 is used without fine-tuning.
 
 ## Main result
 
@@ -8,7 +8,13 @@ On 347 held-out questions against the same 240 known Vietnamese passages, multil
 
 The top-1 difference between E5 and TF-IDF is **9.51 percentage points**. On the paired queries, both succeeded on 275; E5 alone succeeded on 48; TF-IDF alone succeeded on 15; both missed top-1 on 9. Thus E5's higher aggregate result does not mean it wins every query. No significance test or broad Vietnamese retrieval claim is made.
 
-The development results show the same aggregate order: overlap 76.63%, TF-IDF 83.87%, E5 89.32% Hit@1. The protocol and source hashes were frozen before opening test. See the [full test report](../results/test-summary.md) and [research protocol](RESEARCH-PROTOCOL.md).
+| Method | Test Hit@1 | Test Hit@5 | Test MRR@5 | Dev Hit@1 |
+| --- | ---: | ---: | ---: | ---: |
+| Token overlap | 77.81% | 90.20% | 0.8267 | 76.63% |
+| TF-IDF | 83.57% | 97.98% | 0.8974 | 83.87% |
+| Multilingual E5 Small | 93.08% | 99.14% | 0.9573 | 89.32% |
+
+The development results show the same aggregate order on 843 questions. The protocol and source hashes were frozen before opening test. All methods search the same 240 passages; each question has one annotated source-passage target. Hit@k counts targets found in the first k results, and MRR@5 averages reciprocal target rank with zero for a miss. See the [full test report](../results/test-summary.md), [development report](../results/dev-summary.md) and [evaluation protocol](RESEARCH-PROTOCOL.md).
 
 ## Three inspected development cases
 
@@ -22,7 +28,7 @@ TF-IDF ranks a passage about Scottish parliamentary committees first and the ann
 
 Inspection of this implementation's cosine contributions explains the lexical ranking: the Scottish passage scores approximately **0.1768**, with `trò` and `vai` contributing about **0.1097** together. The annotated passage scores approximately **0.1635**, with `elway`, `broncos` and `john` contributing about **0.1436** together. The vector weighting still rewards generic “role/system” wording enough to put the wrong topic first.
 
-This is evidence of one lexical scoring failure. E5's successful ranking is observed; its internal causal reason has not been established. A useful later experiment would test entity-sensitive matching on development data.
+This is evidence of one lexical scoring failure. E5's successful ranking is observed; its internal causal reason has not been established.
 
 ### 2. The right topic and entity can still be the wrong fact
 
@@ -30,7 +36,7 @@ Query `56beca913aeaaa14008c946f`: **“Hậu vệ Panther nào phạm lỗi gi�
 
 TF-IDF ranks the annotated passage first. E5 puts it second, behind a passage describing Panthers defenders and season statistics. Both passages mention Josh Norman, but the annotated passage describes the specific holding penalty and the sequence of plays; the first semantic result discusses his general performance.
 
-The observed error is **fact-level discrimination within the same topic**, rather than a completely unrelated subject. A hypothesis is that one pooled passage vector does not sufficiently distinguish this event from general player information. A reranker could be a future experiment; it has not been implemented or evaluated here.
+The observed error is **fact-level discrimination within the same topic**, rather than a completely unrelated subject. A hypothesis is that one pooled passage vector does not sufficiently distinguish this event from general player information. This explanation is unvalidated; no reranker or controlled ablation was evaluated.
 
 ### 3. A single gold label can penalize a plausible relevant passage
 
@@ -48,9 +54,5 @@ By this project's one-gold metric, both top-1 results count as wrong. Manual rea
 - Test questions are unseen during development, but the full passage collection is known to every index. This does not measure a new corpus or an open-domain search engine.
 - Model pretraining overlap cannot be ruled out. Similarity scores are not confidence estimates, and the demo can return irrelevant text for out-of-corpus questions.
 - Batch throughput and live request time are different measurements. Runtime information is recorded in the generated reports; no portable speed superiority is claimed.
-
-## What to learn next from this artifact
-
-Trace one query through tokenization, vector construction, cosine ranking and metric calculation. Reproduce development metrics, then explain one disagreement using the actual passages. A meaningful student contribution can be a small reviewed change with a stated hypothesis and a dev-only comparison, even if it fails to improve the score.
 
 Dataset attribution: XQuAD, Mikel Artetxe, Sebastian Ruder and Dani Yogatama (2019), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The questions and described source passages above are dataset-derived material; the passage-retrieval adaptation and analysis are specific to this project.

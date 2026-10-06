@@ -4,7 +4,7 @@
 
 On a small Vietnamese passage collection, how do distinct-token overlap, TF-IDF cosine similarity and a pretrained multilingual embedding retriever differ in their ability to rank the annotated source paragraph of a question?
 
-This is a reproducible learning experiment and a working search demo. It is **not** a novel retrieval method, a fine-tuned model, an official XQuAD QA result, or evidence that its author independently implemented every component.
+The experiment compares established retrieval methods and supports a working search demo. Its metrics measure source-passage ranking on an adapted XQuAD collection. E5 is used for inference without fine-tuning; the project introduces no new retrieval model, and these scores are distinct from the official XQuAD extractive-QA results.
 
 ## Dataset and split
 
@@ -46,6 +46,7 @@ Run these from the repository with its environment active:
 python dataset.py
 python -m unittest discover -s tests -v
 python evaluate.py --split dev
+python format_reports.py
 ```
 
 Read `results/dev-summary.md` and `results/dev-error-analysis.md`, inspect data and debug the implementation. Development examples can be used in the demo. Do not select or tune methods using test query outcomes.
@@ -55,6 +56,7 @@ After all retrieval and evaluation code is final:
 ```sh
 python freeze_protocol.py
 python evaluate.py --split test --final-test
+python format_reports.py
 ```
 
 `freeze_protocol.py` records the method set, cutoff, model configuration, source hashes, full processed dataset hash, upstream metadata, split counts and freeze timestamp in `results/protocol.json`. The evaluator checks that snapshot before running test and checks model configuration after constructing the engine. Different devices or cache state do not invalidate the protocol; those runtime details remain visible in the report. Numerical differences across hardware/library versions may still occur.
@@ -66,11 +68,11 @@ Artifacts:
 - `results/dev-metrics.json` and `results/test-metrics.json`: compact, portable metrics and provenance.
 - `results/dev-summary.md` and `results/test-summary.md`: readable tables and limitations.
 - `results/dev.json` and `results/test.json`: local detailed query ranks.
-- `results/dev-error-analysis.md`: deterministic development casebook, up to two examples in each of three disagreement/error categories. It provides observations and prompts, not a validated causal error taxonomy.
+- `results/dev-error-analysis.md`: deterministic development casebook, up to two examples in each of three disagreement/error categories. Its rank observations do not constitute a validated causal error taxonomy.
 - `results/protocol.json`: the frozen protocol used by final evaluation.
 
 ## Limits of the evidence
 
 The corpus is small and translated from an English QA collection. Results do not establish general quality on Vietnamese web search, paraphrases, out-of-domain inputs, questions with no answer, or larger collections. Shared pretraining data cannot be ruled out. Truncation can remove evidence from long passages. No confidence intervals or statistical significance tests are reported. The benchmark evaluates passage ranking, not answer generation or hallucination reduction.
 
-The project was developed with AI assistance. Implementation roles and learning milestones are recorded in [CONTRIBUTIONS.md](CONTRIBUTIONS.md); the benchmark records the behavior of the implemented system.
+The benchmark describes the behavior of the implemented system under the configuration recorded in `results/protocol.json`.
